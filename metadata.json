@@ -1,0 +1,6 @@
+{
+  "name": "OPS FORTUNE",
+  "description": "Real-time MBA Operations Management competition platform: Connect. Decode. Score.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}

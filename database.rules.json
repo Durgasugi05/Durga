@@ -1,0 +1,26 @@
+{
+  "rules": {
+    "users": {
+      "$uid": {
+        ".read": "auth != null && (auth.uid === $uid || root.child('users').child(auth.uid).child('role').val() === 'host' || root.child('users').child(auth.uid).child('role').val() === 'HOST')",
+        ".write": "auth != null && (auth.uid === $uid || root.child('users').child(auth.uid).child('role').val() === 'host' || root.child('users').child(auth.uid).child('role').val() === 'HOST')"
+      }
+    },
+    "gameState": {
+      ".read": "auth != null",
+      ".write": "auth != null && (root.child('users').child(auth.uid).child('role').val() === 'host' || root.child('users').child(auth.uid).child('role').val() === 'HOST')"
+    },
+    "questions": {
+      ".read": "auth != null",
+      ".write": "auth != null && (root.child('users').child(auth.uid).child('role').val() === 'host' || root.child('users').child(auth.uid).child('role').val() === 'HOST')"
+    },
+    "submissions": {
+      "$questionId": {
+        "$teamId": {
+          ".read": "auth != null && (root.child('users').child(auth.uid).child('role').val() === 'host' || root.child('users').child(auth.uid).child('role').val() === 'HOST' || root.child('users').child(auth.uid).child('teamId').val() === $teamId)",
+          ".write": "auth != null && (root.child('users').child(auth.uid).child('role').val() === 'host' || root.child('users').child(auth.uid).child('role').val() === 'HOST' || (root.child('users').child(auth.uid).child('teamId').val() === $teamId && root.child('gameState').child('status').val() === 'RUNNING' && (!data.exists() || data.child('status').val() !== 'SUBMITTED')))"
+        }
+      }
+    }
+  }
+}
